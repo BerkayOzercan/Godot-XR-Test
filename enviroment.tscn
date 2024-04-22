@@ -14,3 +14,8 @@ material = ExtResource("1_gfu8w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -3)
 use_collision = true
 material = ExtResource("2_3kl2y")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.687823, 0, -0.725879, 0, 1, 0, 0.725879, 0, 0.687823, 2.92955, 0.6, -3)
+use_collision = true
+material = ExtResource("2_3kl2y")
