@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://dl77aok0mwqwe"]
+
+[ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="1_cs8y6"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="2_l2k18"]
+[ext_resource type="PackedScene" uid="uid://l2n30mpbkdyw" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/right_hand_low.tscn" id="3_40sbk"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="3_sipqa"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="4_1fcnt"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="5_6xfnt"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="6_75vd6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_flaiw"]
+radius = 0.2
+height = 1.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o3yu2"]
+radius = 0.2
+
+[node name="XROrigin3D" type="XROrigin3D"]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="XRController_LeftHand" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, 0)
+tracker = &"left_hand"
+pose = &"aim"
+
+[node name="LeftHand" parent="XRController_LeftHand" instance=ExtResource("1_cs8y6")]
+
+[node name="MovementDirect" parent="XRController_LeftHand" instance=ExtResource("2_l2k18")]
+
+[node name="FunctionPickup" parent="XRController_LeftHand" instance=ExtResource("3_sipqa")]
+
+[node name="XRController_RightHand" type="XRController3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0)
+tracker = &"right_hand"
+pose = &"aim"
+
+[node name="RightHand" parent="XRController_RightHand" instance=ExtResource("3_40sbk")]
+
+[node name="MovementTurn" parent="XRController_RightHand" instance=ExtResource("4_1fcnt")]
+
+[node name="FunctionPickup" parent="XRController_RightHand" instance=ExtResource("3_sipqa")]
+
+[node name="MovementJump" parent="XRController_RightHand" instance=ExtResource("6_75vd6")]
+jump_button_action = "ax_button"
+
+[node name="PlayerBody" parent="." instance=ExtResource("5_6xfnt")]
+
+[node name="_CollisionShape3D_53693" type="CollisionShape3D" parent="PlayerBody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_flaiw")
+
+[node name="_ShapeCast3D_53694" type="ShapeCast3D" parent="PlayerBody"]
+enabled = false
+shape = SubResource("SphereShape3D_o3yu2")
+margin = 0.01
+max_results = 1
+collision_mask = 1023

@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://ny7mcy12mf1e"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5r4we"]
+[ext_resource type="PackedScene" uid="uid://dl77aok0mwqwe" path="res://xr_character.tscn" id="2_w15x5"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="3_boakk"]
+[ext_resource type="PackedScene" uid="uid://b3qoicnaf84q1" path="res://enviroment.tscn" id="8_vj2ed"]
+[ext_resource type="PackedScene" uid="uid://dju2j8bqvjsfr" path="res://pickable_cube.tscn" id="9_nadcn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vub6j"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_q73wc"]
+sky_material = SubResource("ProceduralSkyMaterial_vub6j")
+
+[sub_resource type="Environment" id="Environment_0dj8t"]
+background_mode = 2
+sky = SubResource("Sky_q73wc")
+tonemap_mode = 2
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_5r4we")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0dj8t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="XR_Character" parent="." instance=ExtResource("2_w15x5")]
+
+[node name="StartXR" parent="." instance=ExtResource("3_boakk")]
+
+[node name="Enviroment" parent="." instance=ExtResource("8_vj2ed")]
+
+[node name="PickableObject" parent="." instance=ExtResource("9_nadcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26449, -3)
