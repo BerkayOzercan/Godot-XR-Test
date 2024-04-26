@@ -35,4 +35,4 @@ shadow_enabled = true
 [node name="Enviroment" parent="." instance=ExtResource("8_vj2ed")]
 
 [node name="PickableObject" parent="." instance=ExtResource("9_nadcn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26449, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00259352, 1.27065, -3.00067)
